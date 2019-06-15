@@ -11,8 +11,8 @@ spring:
         git:
           uri:
           search-paths:
-          username:
-          password:
+          username: 576386273@qq.com
+          password: h19910919
 
 
 
