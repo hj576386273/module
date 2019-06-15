@@ -1,0 +1,30 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+    # 使用ip注册
+    prefer-ip-address: true
+  client:
+    #通过eureka.client.registerWithEureka：false和fetchRegistry：false来表明自己是一个eureka server.
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      # 注意不能写成default-zone，否则将不生效。原因是Eureka有默认的defaultZone配置，端口为8761。
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    # 关闭自我保护机制
+    enable-self-preservation: false
+
+spring:
+  application:
+    name: eurka
+  security:
+    user:
+      name: admin
+      password: 123
+
+
+
+
