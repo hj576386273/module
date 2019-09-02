@@ -1,17 +1,23 @@
 package com.demo.mybatisplus;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.FileOutConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author huangjian
@@ -21,13 +27,23 @@ import java.util.List;
  */
 public class GeneratorCode {
 
-    private boolean file_override = true;// 是否覆盖已有文件
+    private boolean file_override = false;// 是否覆盖已有文件
+    private String author = "huangjian";
+    private String[] include = {"t_area"}; // 生成表名
+    private DateType date_type = DateType.TIME_PACK; // java8 新的时间类型
+    
     private boolean base_resul_tmap = false; // 开启 BaseResultMap
     private boolean base_column_list = false; // 开启 baseColumnList
-    private DateType date_type = DateType.TIME_PACK; // java8 新的时间类型
-    private String author = "huangjian";
-    private String[] include = {"t_area", ""}; // 生成表名
+    private boolean enable_cache = false; //是否在xml中添加二级缓存配置
+    
     private String parent_package = "com.demo.mybatisplus"; // 父包名
+    private String project_path = System.getProperty("user.dir"); // 项目路径
+    private String table_prefix = "t_"; // 表前缀
+    private boolean swagger2 = true; // 开启 swagger2 模式
+    private boolean field_annotation_enable = false; // 是否生成实体时，生成字段注解
+    private boolean lombok_model = true; //实体】是否为lombok模型（默认 false）
+    private boolean builder_model = true; //是否为构建者模型
+    private boolean column_constant = false; //是否生成字段常量
 
     //数据库配置
     private String url = "jdbc:mysql://119.23.52.245:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -57,17 +73,17 @@ public class GeneratorCode {
     public void setGlobalConfig(AutoGenerator mpg) {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = project_path;
         gc.setOutputDir(projectPath + "/src/main/java"); // 生成文件的输出目录
         gc.setFileOverride(file_override); // 是否覆盖已有文件
-        gc.setEnableCache(false); // 是否在xml中添加二级缓存配置
+        gc.setEnableCache(enable_cache); // 是否在xml中添加二级缓存配置
         gc.setAuthor(author); // 开发人员
-        gc.setSwagger2(true); // 开启 swagger2 模式(实体属性 Swagger2 注解)
+        gc.setSwagger2(swagger2); // 开启 swagger2 模式(实体属性 Swagger2 注解)
         gc.setBaseResultMap(base_resul_tmap); //开启 BaseResultMap
         gc.setBaseColumnList(base_column_list);// 开启 baseColumnList
         gc.setDateType(date_type);
         gc.setOpen(false); //
-        //gc.setIdType(IdType.ID_WORKER); v
+        //gc.setIdType(IdType.ID_WORKER); 
 
         gc.setMapperName("%sMapper");
         //gc.setXmlName("%sMapper");
@@ -90,6 +106,7 @@ public class GeneratorCode {
         dsc.setDriverName("com.mysql.jdbc.Driver"); // 驱动名称
         dsc.setUsername(user_name); // 数据库连接用户名
         dsc.setPassword(paaword); // 数据库连接密码
+        
         mpg.setDataSource(dsc); //
     }
 
@@ -120,7 +137,7 @@ public class GeneratorCode {
      */
     public void setInjectionConfig(AutoGenerator mpg) {
 
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = project_path;
         // 自定义配置
         InjectionConfig cfg = new InjectionConfig() {
             @Override
@@ -141,8 +158,9 @@ public class GeneratorCode {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + mpg.getPackageInfo().getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+            	return projectPath + "/src/main/resources/mapper/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+            	//return projectPath + "/src/main/resources/mapper/" + mpg.getPackageInfo().getModuleName()
+                //       + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
             }
         });
         /*
@@ -160,6 +178,7 @@ public class GeneratorCode {
     }
 
     /**
+     * 模板配置
      * @param: mpg
      */
     public void setTemplateConfig(AutoGenerator mpg) {
@@ -174,7 +193,7 @@ public class GeneratorCode {
         templateConfig.setServiceImpl("templates/serviceImpl.java");
         templateConfig.setMapper("templates/mapper.java");
 
-        //templateConfig.setXml(null); // 这是生成mapper包下的xml
+        templateConfig.setXml(null); // 这是生成mapper包下的xml
         mpg.setTemplate(templateConfig);
     }
 
@@ -183,7 +202,7 @@ public class GeneratorCode {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel); // 数据库表映射到实体的命名策略  下划线转驼峰命名
         strategy.setColumnNaming(NamingStrategy.underline_to_camel); // 数据库表字段映射到实体的命名策略, 未指定按照 naming 执行  下划线转驼峰命名
-        strategy.setTablePrefix("t_"); // 表前缀
+        strategy.setTablePrefix(table_prefix); // 表前缀
         //strategy.setFieldPrefix(""); // 字段前缀
         strategy.setSuperEntityClass("com.demo.entity.base.IBaseEntity"); // 自定义继承的Entity类全称，带包名
         strategy.setSuperEntityColumns("id", "create_by", "create_time", "update_by", "update_time"); // 自定义基础的Entity类，公共字段(数据库字段)
@@ -193,13 +212,13 @@ public class GeneratorCode {
         strategy.setSuperControllerClass("com.demo.tool.base.IBaseController"); // 自定义继承的Controller类全称，带包名
         strategy.setInclude(include); // 需要包含的表名，允许正则表达式（与exclude二选一配置）
         //strategy.setExclude(""); // 需要排除的表名，允许正则表达式
-        strategy.setEntityColumnConstant(false); // 是否生成字段常量
-        strategy.setEntityBuilderModel(false); // 是否为构建者模型
-        strategy.setEntityLombokModel(true); // 【实体】是否为lombok模型（默认 false）
+        strategy.setEntityColumnConstant(column_constant); // 是否生成字段常量
+        strategy.setEntityBuilderModel(builder_model); // 是否为构建者模型
+        strategy.setEntityLombokModel(lombok_model); // 【实体】是否为lombok模型（默认 false）
         strategy.setEntityBooleanColumnRemoveIsPrefix(false); // Boolean类型字段是否移除is前缀
         strategy.setRestControllerStyle(true); // 生成@RestController 控制器
         strategy.setControllerMappingHyphenStyle(false); // mapping 驼峰转连字符
-        strategy.setEntityTableFieldAnnotationEnable(false); // 是否生成实体时，生成字段注解
+        strategy.setEntityTableFieldAnnotationEnable(field_annotation_enable); // 是否生成实体时，生成字段注解
         //strategy.setVersionFieldName(""); // 乐观锁属性名称
         //strategy.setLogicDeleteFieldName(""); // 逻辑删除字段名称
         //strategy.setTableFillList(); // 表填充字段

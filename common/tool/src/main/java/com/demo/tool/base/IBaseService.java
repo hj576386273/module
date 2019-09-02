@@ -16,9 +16,11 @@ public interface IBaseService<T> extends IService<T> {
      * 获取对应 entity 的 IBaseMapper
      * @return
      */
-    IBaseMapper getIBaseMapper();
+	@SuppressWarnings("rawtypes")
+	IBaseMapper getIBaseMapper();
 
-    default <E extends T> List<E> selectPage(E entity){
+    @SuppressWarnings("unchecked")
+	default <E extends T> List<E> selectPage(E entity){
         return getIBaseMapper().selectPage(entity);
     }
 }

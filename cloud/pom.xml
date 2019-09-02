@@ -11,6 +11,12 @@
     <packaging>pom</packaging>
 
     <artifactId>cloud</artifactId>
+    
+    <modules>
+        <module>eureka</module>
+        <module>config</module>
+        <module>getway</module>
+    </modules>
 
 
 </project>

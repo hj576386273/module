@@ -28,7 +28,7 @@ public class AreaServiceTest {
     @Autowired
     AreaService areaService;
 
-    @Test
+    /*@Test
     public void test(){
         File provinces = new File("C:\\Users\\huangjian\\Desktop\\provinces.xlsx");
         File city = new File("C:\\Users\\huangjian\\Desktop\\city.xlsx");
@@ -44,10 +44,10 @@ public class AreaServiceTest {
         readExcel(streets);
         System.out.println("------------------------------------444444444444444-------------------------------------------");
         readExcel(villages);
-    }
+    }*/
 
     // 去读Excel的方法readExcel，该方法的入口参数为一个File对象
-    public void readExcel(File file){
+    /*public void readExcel(File file){
         try {
             List<Area> list = new ArrayList<>();
 
@@ -101,6 +101,6 @@ public class AreaServiceTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

@@ -6,8 +6,8 @@ import com.demo.tool.base.IBaseService;
 /**
  * @author huangjian
  * @version 1.0
- * @date: 2019-06-02
- * @description:  服务类
+ * @date: 2019-08-31
+ * @description: 地区 服务类
  */
 public interface AreaService extends IBaseService<Area> {
 

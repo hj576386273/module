@@ -15,5 +15,6 @@
 
     <modules>
         <module>mybatis-plus</module>
+        <module>user</module>
     </modules>
 </project>

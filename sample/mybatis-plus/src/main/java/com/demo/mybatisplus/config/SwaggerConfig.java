@@ -2,6 +2,7 @@ package com.demo.mybatisplus.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -16,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @date: 2019年06月02日
  * @description: TODO
  */
+//@Profile("dev") // 当配置为开发环境时，生效
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -37,7 +39,7 @@ public class SwaggerConfig {
                 //服务条款网址
                 //.termsOfServiceUrl("http://blog.csdn.net/")
                 .version("1.0")
-                //.contact(new Contact("帅呆了", "url", "email"))
+                //.contact(new Contact("", "url", "email"))
                 .build();
     }
 }

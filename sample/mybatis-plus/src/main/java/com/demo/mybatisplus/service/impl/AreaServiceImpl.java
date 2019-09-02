@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 /**
  * @author huangjian
  * @version 1.0
- * @date: 2019-06-02
- * @description:  服务实现类
+ * @date: 2019-08-31
+ * @description: 地区 服务实现类
  */
 @Service
 public class AreaServiceImpl extends IBaseServiceImpl<AreaMapper, Area> implements AreaService {

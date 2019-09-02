@@ -14,8 +14,6 @@ spring:
           username: 576386273@qq.com
           password: h19910918
 
-
-
 eureka:
   client:
     service-url:

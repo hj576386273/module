@@ -15,17 +15,14 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class IBaseEntity extends ITimeBaseEntity implements Serializable {
-
-    /**
-     * serialVersionUID:
-     */
-    private static final long serialVersionUID = -4575837474922480870L;
-
-    @ApiModelProperty(value = "创建时间")
+public class ITimeBaseEntity extends IdBaseEntity implements Serializable {
+	
+	private static final long serialVersionUID = -4361299793530024470L;
+	
+	@ApiModelProperty(value = "创建时间")
     private Date createTime;
     
-    @ApiModelProperty(value = "更新人")
-    private Date updateBy;
-    
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
+
 }
