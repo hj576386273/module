@@ -30,7 +30,12 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
  */
 public class JsonUtils extends ObjectMapper {
 
-    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8416888462238192425L;
+	
+	private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
     /**
      * 当前类的实例持有者（静态内部类，延迟加载，懒汉式，线程安全的单例模式）

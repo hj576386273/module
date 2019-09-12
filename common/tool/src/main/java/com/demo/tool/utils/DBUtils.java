@@ -7,15 +7,15 @@ public class DBUtils {
     private static final String NAME="root";
     private static final String PASSWORD="123456";
 
-    public static void main(String[] args) throws Exception{
-
-        //3.通过数据库的连接操作数据库，实现增删改查
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select code from temp where code='gzAL6'");//选择import java.sql.ResultSet;
-        while(rs.next()){//如果对象中有数据，就会循环打印出来
-            System.out.println(rs.getString("code"));
-        }
-    }
+//    public static void main(String[] args) throws Exception{
+//
+//        //3.通过数据库的连接操作数据库，实现增删改查
+//        Statement stmt = conn.createStatement();
+//        ResultSet rs = stmt.executeQuery("select code from temp where code='gzAL6'");//选择import java.sql.ResultSet;
+//        while(rs.next()){//如果对象中有数据，就会循环打印出来
+//            System.out.println(rs.getString("code"));
+//        }
+//    }
 
     private static Connection conn=null;
     //静态代码块（将加载驱动、连接数据库放入静态块中）

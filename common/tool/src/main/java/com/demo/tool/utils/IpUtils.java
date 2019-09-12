@@ -18,7 +18,8 @@ public class IpUtils {
      * @param request
      * @return
      */
-    public static String getRemoteAddr(HttpServletRequest request) {
+    @SuppressWarnings("deprecation")
+	public static String getRemoteAddr(HttpServletRequest request) {
         if (request == null) {
             return "unknown";
         }

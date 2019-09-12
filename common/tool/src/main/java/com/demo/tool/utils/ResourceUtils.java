@@ -20,6 +20,7 @@ public class ResourceUtils extends org.springframework.util.ResourceUtils {
 
     /**
      * 获取资源加载器（可读取jar内的文件）
+     *
      * @author ThinkGem
      */
     public static ResourceLoader getResourceLoader() {
@@ -41,42 +42,51 @@ public class ResourceUtils extends org.springframework.util.ResourceUtils {
     }
 
     /**
+     * 获取资源加载器（可读取jar内的文件）
+     */
+    public static Resource getResourceClassPath(String location) {
+        return resourceLoader.getResource(CLASSPATH_URL_PREFIX + location);
+    }
+
+    /**
      * 获取资源文件流（用后记得关闭）
+     *
      * @param location
      * @author ThinkGem
      * @throws IOException
      */
-    public static InputStream getResourceFileStream(String location) throws IOException{
+    public static InputStream getResourceFileStream(String location) throws IOException {
         Resource resource = resourceLoader.getResource(location);
         return resource.getInputStream();
     }
 
     /**
      * 获取资源文件内容
+     *
      * @param location
      * @author ThinkGem
      */
-    public static String getResourceFileContent(String location){
+    public static String getResourceFileContent(String location) {
         InputStream is = null;
-        try{
+        try {
             is = ResourceUtils.getResourceFileStream(location);
             return IOUtils.toString(is, "UTF-8");
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally{
+        } finally {
             IOUtils.closeQuietly(is);
         }
     }
 
     /**
      * Spring 搜索资源文件
+     *
      * @param locationPattern
      * @author ThinkGem
      */
-    public static Resource[] getResources(String locationPattern){
+    public static Resource[] getResources(String locationPattern) {
         try {
-            Resource[] resources = new PathMatchingResourcePatternResolver()
-                    .getResources(locationPattern);
+            Resource[] resources = new PathMatchingResourcePatternResolver().getResources(locationPattern);
 //			System.out.println("===========\n===========");
 //			System.out.println(locationPattern + "   :   " + resources.length);
 //			System.out.println("===========\n===========");

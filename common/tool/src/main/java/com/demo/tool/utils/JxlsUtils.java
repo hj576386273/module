@@ -32,6 +32,17 @@ public class JxlsUtils {
         JxlsUtils.exportExcel(templateName, os, data);
         os.close();
     }
+    
+    public static void download(String templateName, String exportName, Map<String, Object> data) throws Exception {
+    	HttpServletResponse response = RequestContextUtils.getResponse();
+    	response.setContentType("application/vnd.ms-excel");
+        OutputStream os = response.getOutputStream();
+        exportName = new String(exportName.getBytes("utf-8"), "ISO-8859-1");
+        // 组装附件名称和格式
+        response.setHeader("Content-disposition", "attachment; filename=" + exportName + ".xls");
+        JxlsUtils.exportExcel(templateName, os, data);
+        os.close();
+    }
 
     public static void exportExcel(InputStream is, OutputStream os, Map<String, Object> model) throws IOException{
         Context context = PoiTransformer.createInitialContext();
@@ -59,23 +70,19 @@ public class JxlsUtils {
     }
 
     public static void exportExcel(String templateName, OutputStream os, Map<String, Object> model) throws Exception {
-        File template = getTemplate(templateName);
-        if(template != null){
-            exportExcel(new FileInputStream(template), os, model);
+    	InputStream template = getTemplate(templateName);
+        if (template != null) {
+            exportExcel(template, os, model);
         } else {
             throw new Exception("Excel 模板未找到。");
         }
     }
 
     //获取jxls模版文件
-    public static File getTemplate(String fileName) throws Exception{
+    public static InputStream getTemplate(String fileName) throws Exception{
         //File template = ResourceUtils.getFile("classpath:"+path);
-        String path = JxlsUtils.class.getClassLoader().getResource(TEMPLATE_PATH).getPath();
-        File template = new File(path, fileName);
-        if(template.exists()){
-            return template;
-        }
-        return null;
+    	InputStream inputStream = ResourceUtils.getResourceClassPath(TEMPLATE_PATH + "/" + fileName).getInputStream();
+        return inputStream;
     }
 
     // 日期格式化
