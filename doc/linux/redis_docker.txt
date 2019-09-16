@@ -1,0 +1,22 @@
+docker run -d --privileged=true \
+-p 6379:6379 \
+-v /config/redis/redis.conf:/etc/redis/redis.conf \
+-v /data/redis:/data --name redis \
+redis:latest redis-server /etc/redis/redis.conf
+
+--privileged=true：容器内的root拥有真正root权限，否则容器内root只是外部普通用户权限
+-v /docker/redis/conf/redis.conf:/etc/redis/redis.conf：映射配置文件
+-v /data/redis:/data：映射数据目录
+redis-server /etc/redis/redis.conf：指定配置文件启动redis-server进程
+
+
+
+
+
+
+
+
+
+
+
+

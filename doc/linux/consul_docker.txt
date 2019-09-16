@@ -1,0 +1,15 @@
+docker run -d --name consul --net=host consul
+
+
+
+
+
+
+
+
+
+
+
+
+
+
