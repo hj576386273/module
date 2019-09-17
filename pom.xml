@@ -13,6 +13,7 @@
         <module>cloud</module>
         <module>sample</module>
         <module>cloud</module>
+        <module>parent</module>
     </modules>
 
 

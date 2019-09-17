@@ -1,0 +1,22 @@
+
+docker run -d --net=host -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=rabbitmq --name rabbit rabbitmq:3-management
+
+#下载延时插件
+wget https://dl.bintray.com/rabbitmq/community-plugins/3.7.x/rabbitmq_delayed_message_exchange/rabbitmq_delayed_message_exchange-20171201-3.7.x.zip
+
+#解压文件
+
+#复制进docker文件目录
+docker cp rabbitmq_delayed_message_exchange-20171201-3.7.x.ez 容器id:/plugins
+
+#进入容器
+docker exec -it rabbit /bin/bash
+#进入/plugins目录 查看是否有rabbitmq_delayed_message_exchange-20171201-3.7.x.ez文件
+
+#执行 log最后出现started 1 plugins.，就说明开启成功
+rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+
+
+
+
+
