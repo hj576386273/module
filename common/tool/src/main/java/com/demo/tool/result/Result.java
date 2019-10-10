@@ -14,6 +14,11 @@ public class Result<T> {
     private String msg;
     private T data;
 
+    Result(int code){
+        super();
+        this.code=code;
+    }
+
     Result(int code, String msg){
         super();
         this.code=code;
