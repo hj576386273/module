@@ -1,6 +1,8 @@
 package com.demo.tool.result;
 
+import com.demo.tool.utils.JsonUtils;
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -47,6 +49,11 @@ public class Result<T> {
         this.code=resultEnum.getCode();
         this.msg=resultEnum.getMsg();
         this.data=data;
+    }
+
+    @Override
+    public String toString(){
+        return JsonUtils.toJson(this);
     }
 
 }

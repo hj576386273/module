@@ -15,6 +15,10 @@ public class ResultTool {
         return new Result(ResultEnum.success);
     }
 
+    public static Result errorDenied(){
+        return new Result(ResultEnum.error_403);
+    }
+
     public static Result error(){
         return new Result(ResultEnum.error_404);
     }
