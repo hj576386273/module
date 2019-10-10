@@ -7,6 +7,10 @@ package com.demo.tool.result;
  */
 public class ResultTool {
 
+    public static Result builder(){
+        return new Result();
+    }
+
     public static Result success(){
         return new Result(ResultEnum.success);
     }
@@ -16,6 +20,6 @@ public class ResultTool {
     }
 
     public static Result error(String msg){
-        return new Result(ResultEnum.error_404.getCode(), msg);
+        return builder().setCode(ResultEnum.error_404.getCode()).setMsg(msg);
     }
 }

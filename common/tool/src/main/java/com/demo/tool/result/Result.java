@@ -1,6 +1,7 @@
 package com.demo.tool.result;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author huangjian
@@ -8,11 +9,14 @@ import lombok.Data;
  * @date: 2019年10月10日 15:49
  */
 @Data
+@Accessors(chain = true)
 public class Result<T> {
 
     private int code;
     private String msg;
     private T data;
+
+    Result(){}
 
     Result(int code){
         super();

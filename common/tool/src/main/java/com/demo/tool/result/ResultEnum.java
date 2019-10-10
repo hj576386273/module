@@ -10,6 +10,7 @@ public enum ResultEnum {
 
 
     success(200, "success"),
+    error_403(403, "权限不足"),
     error_404(404, "404 error"),
     error_500(500, "500 error"),
     ;
