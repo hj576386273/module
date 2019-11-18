@@ -101,7 +101,7 @@ public abstract class IBaseController<M extends IBaseService<T>, T> {
     
     /**
      * SaveBatch 参数校验
-     * @param entity
+     * @param
      */
     private void checkSaveBatch(Collection<T> entityList){
     	ValidationUtils.validate(entityList);

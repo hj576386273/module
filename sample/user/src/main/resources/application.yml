@@ -4,35 +4,46 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://119.23.52.245:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: test
-    password: test!@#$
+    username: root
+    password: root!@#
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    driver-class-name: com.mysql.jdbc.Driver
   application:
-    name: user-consul
-  cloud:
-    consul:
-      host: 119.23.52.245
-      port: 8500
-      discovery:
-        ip-address: ${HOST_ADDRESS:localhost}
-        port: ${SERVER_PORT:${server.port}}
-        # Consul实例的运行状况检查默认为“/ health”，它是Spring Boot Actuator应用程序中有用端点的默认位置
-        health-check-path: /health
-        # 用于检查运行状况端点的间隔。“10s”和“1m”分别表示10秒和1分钟
-        health-check-interval: 15s
-        #启用服务注册
-        register: true
-        #启用服务发现
-        enabled: true
-        #服务停止时取消注册
-        deregister: true
-        #表示注册时使用IP而不是hostname
-        prefer-ip-address: true
-        # 应用名称+服务器IP+端口
-        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port} 
+    name: user
+#  cloud:
+#    consul:
+#      host: 119.23.52.245
+#      port: 8500
+#      discovery:
+#        ip-address: ${HOST_ADDRESS:localhost}
+#        port: ${SERVER_PORT:${server.port}}
+#        # Consul实例的运行状况检查默认为“/ health”，它是Spring Boot Actuator应用程序中有用端点的默认位置
+#        health-check-path: /health
+#        # 用于检查运行状况端点的间隔。“10s”和“1m”分别表示10秒和1分钟
+#        health-check-interval: 15s
+#        #启用服务注册
+#        register: true
+#        #启用服务发现
+#        enabled: true
+#        #服务停止时取消注册
+#        deregister: true
+#        #表示注册时使用IP而不是hostname
+#        prefer-ip-address: true
+#        # 应用名称+服务器IP+端口
+#        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123@localhost:8761/eureka/
+    security:
+      basic:
+        user: admin
+        password: 123
 
 mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+
+

@@ -1,6 +1,7 @@
 package com.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.demo.entity.base.IBaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -55,6 +56,5 @@ public class Area extends IBaseEntity {
 
     @ApiModelProperty(value = "删除标识，-1删除，0正常")
     private Integer isDelete;
-
 
 }

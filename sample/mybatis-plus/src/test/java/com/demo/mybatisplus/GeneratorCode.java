@@ -27,28 +27,31 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
  */
 public class GeneratorCode {
 
-    private boolean file_override = false;// 是否覆盖已有文件
+    private boolean file_override = true;// 是否覆盖已有文件
     private String author = "huangjian";
-    private String[] include = {"t_area"}; // 生成表名
+    private String[] include = {"vip_drink_ticket_record"}; // 生成表名
     private DateType date_type = DateType.TIME_PACK; // java8 新的时间类型
     
-    private boolean base_resul_tmap = false; // 开启 BaseResultMap
-    private boolean base_column_list = false; // 开启 baseColumnList
+    private boolean base_resul_tmap = true; // 开启 BaseResultMap
+    private boolean base_column_list = true; // 开启 baseColumnList
     private boolean enable_cache = false; //是否在xml中添加二级缓存配置
     
     private String parent_package = "com.demo.mybatisplus"; // 父包名
     private String project_path = System.getProperty("user.dir"); // 项目路径
-    private String table_prefix = "t_"; // 表前缀
-    private boolean swagger2 = true; // 开启 swagger2 模式
-    private boolean field_annotation_enable = false; // 是否生成实体时，生成字段注解
-    private boolean lombok_model = true; //实体】是否为lombok模型（默认 false）
-    private boolean builder_model = true; //是否为构建者模型
+    private String table_prefix = ""; // 表前缀
+    private boolean swagger2 = false; // 开启 swagger2 模式
+    private boolean field_annotation_enable = true; // 是否生成实体时，生成字段注解
+    private boolean lombok_model = false; //实体】是否为lombok模型（默认 false）
+    private boolean builder_model = false; //是否为构建者模型
     private boolean column_constant = false; //是否生成字段常量
 
     //数据库配置
-    private String url = "jdbc:mysql://119.23.52.245:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false";
-    private String user_name = "test";
-    private String paaword = "test!@#$";
+//    private String url = "jdbc:mysql://119.23.52.245:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false";
+//    private String user_name = "test";
+//    private String paaword = "test!@#$";
+    private String url = "jdbc:mysql://10.10.51.117:3306/pincard?useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&zeroDateTimeBehavior=convertToNull";
+    private String user_name = "root";
+    private String paaword = "yunnex123";
 
     @Test
     public void generatorCode() {
