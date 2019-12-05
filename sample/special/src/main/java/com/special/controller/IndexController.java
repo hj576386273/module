@@ -31,4 +31,14 @@ public class IndexController {
         return "3d_spin";
     }
 
+    @RequestMapping(value = "/xc")
+    public String xc(){
+        return "xc";
+    }
+
+    @RequestMapping(value = "/clock")
+    public String clock(){
+        return "clock";
+    }
+
 }
