@@ -13,12 +13,22 @@ public class IndexController {
 
     @RequestMapping(value = "/")
     public String index(){
-        return "index";
+        return "3d_spin";
     }
 
     @RequestMapping(value = "/spin")
     public String spin(){
-        return "spin/index";
+        return "spin";
+    }
+
+    @RequestMapping(value = "/pao")
+    public String paopao(){
+        return "paopao";
+    }
+
+    @RequestMapping(value = "/3d_spin")
+    public String spin_(){
+        return "3d_spin";
     }
 
 }
