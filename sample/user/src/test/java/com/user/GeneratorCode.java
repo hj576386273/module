@@ -47,8 +47,8 @@ public class GeneratorCode {
 
     //数据库配置
     private String url = "jdbc:mysql://119.23.52.245:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false";
-    private String user_name = "test";
-    private String paaword = "test!@#$";
+    private String user_name = "root";
+    private String paaword = "root!@#";
     private String driver_name = "com.mysql.cj.jdbc.Driver";
 
     @Test
