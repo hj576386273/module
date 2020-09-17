@@ -33,7 +33,8 @@ public class BeanUtils {
         if (source.isEmpty()){
             return Collections.emptyList();
         }
-        List<T> list = new ArrayList<>();
+        int size = (int) ((int) source.size()/0.75 + 1);
+        List<T> list = new ArrayList<>(size);
         source.forEach(item -> list.add(copy(item, clazz)));
         return list;
 
