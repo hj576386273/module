@@ -29,6 +29,15 @@ public class BeanUtils {
         return bean;
     }
 
+    public static <T> T copy(Object source, T bean){
+        if (source == null){
+            return null;
+        }
+        BeanCopier bc = BeanCopier.create(source.getClass(), bean.getClass(), false);
+        bc.copy(source, bean, null);
+        return bean;
+    }
+
     public static <T> List<T> copyList(Collection source, Class<T> clazz){
         if (source.isEmpty()){
             return Collections.emptyList();
