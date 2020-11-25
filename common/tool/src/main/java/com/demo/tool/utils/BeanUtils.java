@@ -47,7 +47,10 @@ public class BeanUtils {
     }
 
     public static <T> Map bean2Map(T bean){
-        return BeanMap.create(bean);
+        Map<String, Object> hashMap = new HashMap<>(16);
+        BeanMap beanMap = BeanMap.create(bean);
+        hashMap.putAll(beanMap);
+        return hashMap;
     }
 
     private static <T> T newInstance(Class<T> clazz){
