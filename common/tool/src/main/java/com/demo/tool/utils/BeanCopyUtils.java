@@ -16,36 +16,57 @@ import java.util.Map;
  * @version 1.0
  * @date: 2020年09月17日 21:47
  */
-public class BeanUtils {
+public class BeanCopyUtils {
 
 
+    /**
+     * 复制bean信息
+     * @param source
+     * @param clazz
+     * @param <T>
+     * @return
+     */
     public static <T> T copy(Object source, Class<T> clazz){
         if (source == null){
             return null;
         }
-        BeanCopier bc = BeanCopier.create(source.getClass(), clazz, false);
+        BeanCopier copier = BeanCopier.create(source.getClass(), clazz, false);
         T bean = newInstance(clazz);
-        bc.copy(source, bean, null);
+        copier.copy(source, bean, null);
         return bean;
     }
 
-    public static <T> T copy(Object source, T bean){
+    /**
+     * 复制bean信息
+     * @param source
+     * @param target
+     * @param <T>
+     * @return
+     */
+    public static <T> T copy(Object source, T target){
         if (source == null){
             return null;
         }
-        BeanCopier bc = BeanCopier.create(source.getClass(), bean.getClass(), false);
-        bc.copy(source, bean, null);
-        return bean;
+        BeanCopier bc = BeanCopier.create(source.getClass(), target.getClass(), false);
+        bc.copy(source, target, null);
+        return target;
     }
 
-    public static <T> List<T> copyList(Collection source, Class<T> clazz){
+    public static <T, E> List<T> copyList(Collection<E> source, Class<T> clazz){
+        return copyList(source, clazz, item -> Boolean.TRUE);
+    }
+
+    public static <T, E> List<T> copyList(Collection<E> source, Class<T> clazz, Predicate<? super E> predicate){
         if (source.isEmpty()){
             return Collections.emptyList();
         }
         List<T> list = new ArrayList<>(source.size());
-        source.forEach(item -> list.add(copy(item, clazz)));
+        source.forEach(item -> {
+            if (predicate.test(item)){
+                list.add(copy(item, clazz));
+            }
+        });
         return list;
-
     }
 
     public static <T> T map2Bean(Map<?, ?> source, Class<T> clazz){
@@ -55,7 +76,7 @@ public class BeanUtils {
         return bean;
     }
 
-    public static <T> Map bean2Map(T bean){
+    public static <T> Map<String, Object> bean2Map(T bean){
         Map<String, Object> hashMap = new HashMap<>(16);
         BeanMap beanMap = BeanMap.create(bean);
         hashMap.putAll(beanMap);
