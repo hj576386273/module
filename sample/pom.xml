@@ -17,5 +17,6 @@
         <module>mybatis-plus</module>
         <module>user</module>
         <module>special</module>
+        <module>sysio</module>
     </modules>
 </project>

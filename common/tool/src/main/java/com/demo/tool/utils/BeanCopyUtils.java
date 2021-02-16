@@ -1,15 +1,17 @@
 package com.demo.tool.utils;
 
 import lombok.Data;
-import lombok.val;
 import org.springframework.cglib.beans.BeanCopier;
 import org.springframework.cglib.beans.BeanMap;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * @author huangjian
@@ -94,11 +96,12 @@ public class BeanCopyUtils {
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
         X x = new X();
         x.index = 5;
         Y copy = copy(x, Y.class);
         System.out.println(copy.index);
+
     }
 
 
